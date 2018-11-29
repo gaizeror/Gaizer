@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GazierConverter
 {
-    public class Class1
+    public class Converter
     {
-        public void Convert(string input, string filename, string output, WdSaveFormat format)
+        public static void Convert(string input, string filename, string output, WdSaveFormat format)
         {
             Microsoft.Office.Interop.Word._Application oWord = new Microsoft.Office.Interop.Word.Application();
             Microsoft.Office.Interop.Word._Document oDoc = null;

@@ -15,11 +15,12 @@ namespace GaizerMicoService.Controllers
             return DateTime.Now.ToString();
         }
 
-        //[HttpPost]
-        //[Route("convert/pdf")]
-        //public string ss()
-        //{
-        //    return null;
-        //}
+        [HttpPost]
+        [Route("api/convert")]
+        public string Convert(string file)//Will be Stream
+        {
+            // GazierConverter.Converter.Convert()
+            return null;
+        }
     }
 }
