@@ -9,8 +9,9 @@ namespace GazierConverter
 {
     public class Converter
     {
-        public static void Convert(string input, string filename, string output, WdSaveFormat format)
+        public static void ConvertToPdf(string input, string filename, string output)
         {
+            WdSaveFormat format = WdSaveFormat.wdFormatPDF;
             Microsoft.Office.Interop.Word._Application oWord = new Microsoft.Office.Interop.Word.Application();
             Microsoft.Office.Interop.Word._Document oDoc = null;
             object oMissing = System.Reflection.Missing.Value;

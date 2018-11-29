@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -21,28 +22,25 @@ namespace GaizerMicoService.Controllers
 
         [HttpPost]
         [Route("api/convert")]
-        public async Task<string> ConvertAsync(string file_name)
+        public HttpResponseMessage ConvertAsync(string file_name)
         {
-            //var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
-            //MultipartFormDataStreamProvider s = await Request.Content.ReadAsMultipartAsync(streamProvider);
-            //StreamContent ss = this.StreamConversion();
-
             string docxFilePath = GetDocxFilePath(file_name);
 
-            await WriteFileToLocalDocx(docxFilePath);
+            string pdfOutputPath = SaveAsPDF(docxFilePath);
 
-            
-
-            //StreamContent ss = this.StreamConversion(s);
-            // GazierConverter.Converter.Convert()
-
-            return null;
+            return ComposePDFHttpResult(file_name, pdfOutputPath);
         }
 
-        private async Task WriteFileToLocalDocx(string docxFilePath)
+        private static string SaveAsPDF(string docxFilePath)
         {
-            Stream reqStream = await Request.Content.ReadAsStreamAsync();
-            WriteToFile(reqStream, docxFilePath);
+            string inputFilePath = docxFilePath;
+            var filename = Path.GetFileNameWithoutExtension(inputFilePath);
+            var parentDir = Path.GetDirectoryName(inputFilePath);
+            var outputPath = Path.Combine(parentDir, filename + ".pdf");
+
+            GazierConverter.Converter.ConvertToPdf(inputFilePath, filename, outputPath);
+
+            return outputPath;
         }
 
         private static string GetDocxFilePath(string fileName)
@@ -50,6 +48,27 @@ namespace GaizerMicoService.Controllers
             string docxUniqueFileName = fileName + Guid.NewGuid();
             string docxFilePath = Path.Combine(Path.GetTempPath(), docxUniqueFileName);
             return docxFilePath;
+        }
+
+        private static HttpResponseMessage ComposePDFHttpResult(string file_name, string pdfOutputPath)
+        {
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            var stream = new FileStream(pdfOutputPath, FileMode.Open); // Read the PDF from file
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            result.Content.Headers.ContentDisposition.FileName = file_name;
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            result.Content.Headers.ContentLength = stream.Length;
+            return result;
+        }
+
+
+
+
+        private async Task WriteFileToLocalDocx(string docxFilePath)
+        {
+            Stream reqStream = await Request.Content.ReadAsStreamAsync();
+            WriteToFile(reqStream, docxFilePath);
         }
 
         private static void WriteToFile(Stream reqStream,string path)
