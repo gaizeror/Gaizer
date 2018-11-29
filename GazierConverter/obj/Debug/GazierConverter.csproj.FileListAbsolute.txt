@@ -1,0 +1,5 @@
+C:\Users\Mizrahi\source\repos\DockToPDF2\DocxToPDF\DocxToPDFConverter\bin\Debug\GaizerConverter.dll
+C:\Users\Mizrahi\source\repos\DockToPDF2\DocxToPDF\DocxToPDFConverter\bin\Debug\GaizerConverter.pdb
+C:\Users\Mizrahi\source\repos\DockToPDF2\DocxToPDF\DocxToPDFConverter\obj\Debug\GazierConverter.csproj.CoreCompileInputs.cache
+C:\Users\Mizrahi\source\repos\DockToPDF2\DocxToPDF\DocxToPDFConverter\obj\Debug\GaizerConverter.dll
+C:\Users\Mizrahi\source\repos\DockToPDF2\DocxToPDF\DocxToPDFConverter\obj\Debug\GaizerConverter.pdb
