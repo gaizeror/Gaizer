@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocxToPDFMicoService
+namespace GaizerMicoService
 {
     public class MicroServiceInstaller : ProjectInstaller { }
     public class MicroServiceService : InternalService { }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocxToPDFConverter
+namespace GazierConverter
 {
     public class Class1
     {

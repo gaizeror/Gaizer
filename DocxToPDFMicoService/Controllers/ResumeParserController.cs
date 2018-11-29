@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DocxToPDFMicoService.Controllers
+namespace GaizerMicoService.Controllers
 {
     public class ResumeParserController : ApiController
     {

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxToPDFMicoService", "DocxToPDFMicoService\DocxToPDFMicoService.csproj", "{1C410A64-9B2E-4776-B50D-5E0062F01CD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaizerMicoService", "DocxToPDFMicoService\GaizerMicoService.csproj", "{1C410A64-9B2E-4776-B50D-5E0062F01CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxToPDFConverter", "DocxToPDFConverter\DocxToPDFConverter.csproj", "{F47AE983-2CD1-4906-8852-F7A9DE9DC392}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GazierConverter", "DocxToPDFConverter\GazierConverter.csproj", "{F47AE983-2CD1-4906-8852-F7A9DE9DC392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
