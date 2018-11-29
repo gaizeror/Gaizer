@@ -21,26 +21,43 @@ namespace GaizerMicoService.Controllers
 
         [HttpPost]
         [Route("api/convert")]
-        public async Task<string> ConvertAsync(string fileName)
+        public async Task<string> ConvertAsync(string file_name)
         {
             //var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
             //MultipartFormDataStreamProvider s = await Request.Content.ReadAsMultipartAsync(streamProvider);
             //StreamContent ss = this.StreamConversion();
 
-            Stream reqStream = await Request.Content.ReadAsStreamAsync();
-            WriteToFile(reqStream,fileName);
+            string docxFilePath = GetDocxFilePath(file_name);
+
+            await WriteFileToLocalDocx(docxFilePath);
+
+            
+
             //StreamContent ss = this.StreamConversion(s);
             // GazierConverter.Converter.Convert()
 
             return null;
         }
 
-        private static void WriteToFile(Stream reqStream,string fileName)
+        private async Task WriteFileToLocalDocx(string docxFilePath)
+        {
+            Stream reqStream = await Request.Content.ReadAsStreamAsync();
+            WriteToFile(reqStream, docxFilePath);
+        }
+
+        private static string GetDocxFilePath(string fileName)
+        {
+            string docxUniqueFileName = fileName + Guid.NewGuid();
+            string docxFilePath = Path.Combine(Path.GetTempPath(), docxUniqueFileName);
+            return docxFilePath;
+        }
+
+        private static void WriteToFile(Stream reqStream,string path)
         {
             using (MemoryStream tempStream = new MemoryStream())
             {
                 reqStream.CopyTo(tempStream);
-                using (var fileStream = File.Create("C:\\Path\\To\\File"))
+                using (var fileStream = File.Create(path))
                 {
                     tempStream.Seek(0, SeekOrigin.Begin);
                     tempStream.CopyTo(fileStream);
