@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GaizerMicoService.Bindings;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,10 +22,37 @@ namespace GaizerMicoService.Controllers
         }
 
         [HttpPost]
+        [Route("api/convertTest")]
+        public string ConvertTestAsync([ByteArrayFileParameterBinding] byte[] raw)
+        {
+            return raw.Length + "Bytes";
+
+            string docxFilePath = null;
+
+            try
+            {
+                docxFilePath = GenerateDocxFilePath();
+
+                string pdfOutputPath = SaveAsPDF(docxFilePath);
+
+                //return ComposePDFHttpResult(Guid.NewGuid().ToString(), pdfOutputPath);
+            }
+            finally
+            {
+                if (string.IsNullOrEmpty(docxFilePath))
+                {
+                    throw new Exception("Cannot file temp doc file. Check this out, otherwise server's storage will be full");
+                }
+
+                File.Delete(docxFilePath);
+            }
+        }
+
+        [HttpPost]
         [Route("api/convert")]
         public HttpResponseMessage ConvertAsync(string file_name)
         {
-            string docxFilePath = GetDocxFilePath(file_name);
+            string docxFilePath = GenerateDocxFilePath(file_name);
 
             string pdfOutputPath = SaveAsPDF(docxFilePath);
 
@@ -43,9 +71,18 @@ namespace GaizerMicoService.Controllers
             return outputPath;
         }
 
-        private static string GetDocxFilePath(string fileName)
+        private string SaveTempDocFile(byte[] fileRawByteArray)
         {
-            string docxUniqueFileName = fileName + Guid.NewGuid();
+            string docxFilePath = GenerateDocxFilePath();
+
+            File.WriteAllBytes(docxFilePath, fileRawByteArray);
+
+            return docxFilePath;
+        }
+
+        private static string GenerateDocxFilePath(string fileNamePrefix = "")
+        {
+            string docxUniqueFileName = fileNamePrefix + Guid.NewGuid();
             string docxFilePath = Path.Combine(Path.GetTempPath(), docxUniqueFileName);
             return docxFilePath;
         }
