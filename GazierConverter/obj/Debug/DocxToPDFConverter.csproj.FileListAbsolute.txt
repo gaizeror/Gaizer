@@ -1,6 +1,0 @@
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\bin\Debug\DocxToPDFConverter.dll
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\bin\Debug\DocxToPDFConverter.pdb
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\obj\Debug\DocxToPDFConverter.csprojAssemblyReference.cache
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\obj\Debug\DocxToPDFConverter.csproj.CoreCompileInputs.cache
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\obj\Debug\DocxToPDFConverter.dll
-c:\users\mizrahi\source\repos\DocxToPDF\DocxToPDFConverter\obj\Debug\DocxToPDFConverter.pdb
