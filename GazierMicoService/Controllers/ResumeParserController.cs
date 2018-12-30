@@ -23,10 +23,8 @@ namespace GaizerMicoService.Controllers
 
         [HttpPost]
         [Route("api/convertTest")]
-        public string ConvertTestAsync([ByteArrayFileParameterBinding] byte[] raw)
+        public HttpResponseMessage ConvertTestAsync([ByteArrayFileParameterBinding] byte[] raw)
         {
-            return raw.Length + "Bytes";
-
             string docxFilePath = null;
 
             try
@@ -35,7 +33,7 @@ namespace GaizerMicoService.Controllers
 
                 string pdfOutputPath = SaveAsPDF(docxFilePath);
 
-                //return ComposePDFHttpResult(Guid.NewGuid().ToString(), pdfOutputPath);
+                return ComposePDFHttpResult(Guid.NewGuid().ToString(), pdfOutputPath);
             }
             finally
             {
