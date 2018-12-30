@@ -17,20 +17,6 @@ namespace GaizerMicoService
         {
             var microService = new MicroService();
             microService.Run(args);
-            //Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-        }
-
-        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-        {
-            // Log the exception, display it, etc
-            Debug.WriteLine(e.Exception.Message);
-        }
-
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            // Log the exception, display it, etc
-            Debug.WriteLine((e.ExceptionObject as Exception).Message);
         }
     }
 }
